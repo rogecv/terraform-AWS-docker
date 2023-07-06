@@ -1,0 +1,16 @@
+1. Recupere un token de autenticación y autentique su cliente de Docker en el registro.
+Utilice AWS CLI:
+
+aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 584951634252.dkr.ecr.ca-central-1.amazonaws.com
+
+2. Cree una imagen de Docker con el siguiente comando. Para obtener información sobre cómo crear un archivo de Docker desde cero, consulte las instrucciones aquí . Puede omitir este paso si ya se creó la imagen:
+
+docker build -t myapp .
+
+3. Cuando se complete la creación, etiquete la imagen para poder enviarla a este repositorio:
+
+docker tag myapp:latest 584951634252.dkr.ecr.ca-central-1.amazonaws.com/myapp:latest
+
+4. Ejecute el siguiente comando para enviar esta imagen al repositorio de AWS recién creado:
+docker push 584951634252.dkr.ecr.ca-central-1.amazonaws.com/myapp:latest
+
